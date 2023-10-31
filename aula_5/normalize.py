@@ -1,8 +1,8 @@
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from sklearn import preprocessing
-import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn import preprocessing
 
 # Para reproducilidade
 np.random.seed(13)

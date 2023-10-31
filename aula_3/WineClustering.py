@@ -1,12 +1,11 @@
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-
-from sklearn.decomposition import PCA
-from sklearn.preprocessing import StandardScaler
 from sklearn import metrics
-from sklearn.model_selection import ParameterGrid
 from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
+from sklearn.model_selection import ParameterGrid
+from sklearn.preprocessing import StandardScaler
 
 
 def load_embeddings():
@@ -50,21 +49,28 @@ def pca_embeddings(df_scaled):
         )
     )
     print(
-        "Cumulative variance explained by 2 principal components: {:.2%}".format(
-            np.sum(pca_2.explained_variance_ratio_)
-        )
+        "Cumulative variance explained by 2 principal components: {:.2%}"
+        .format(np.sum(pca_2.explained_variance_ratio_))
     )
 
     # Results from pca.components_
     dataset_pca = pd.DataFrame(
-        abs(pca_2.components_), columns=df_scaled.columns, index=["PC_1", "PC_2"]
+        abs(pca_2.components_),
+        columns=df_scaled.columns,
+        index=["PC_1", "PC_2"],
     )
     print("\n\n", dataset_pca)
 
-    print("\n*************** Most important features *************************")
+    print(
+        "\n*************** Most important features *************************"
+    )
     print("As per PC 1:\n", (dataset_pca[dataset_pca > 0.3].iloc[0]).dropna())
-    print("\n\nAs per PC 2:\n", (dataset_pca[dataset_pca > 0.3].iloc[1]).dropna())
-    print("\n******************************************************************")
+    print(
+        "\n\nAs per PC 2:\n", (dataset_pca[dataset_pca > 0.3].iloc[1]).dropna()
+    )
+    print(
+        "\n******************************************************************"
+    )
 
     return pca_2_result, pca_2
 
@@ -132,7 +138,9 @@ def visualizing_results(pca_result, label, centroids_pca):
     x = pca_result[:, 0]
     y = pca_result[:, 1]
 
-    plt.scatter(x, y, c=label, alpha=0.5, s=200)  # plot different colors per cluster
+    plt.scatter(
+        x, y, c=label, alpha=0.5, s=200
+    )  # plot different colors per cluster
     plt.title("Wine clusters")
     plt.xlabel("PCA 1")
     plt.ylabel("PCA 2")

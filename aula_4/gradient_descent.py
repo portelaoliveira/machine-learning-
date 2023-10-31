@@ -1,5 +1,5 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Problemas lineares - Regressão Linear
 
@@ -61,7 +61,9 @@ def gradient_descent_runner(
 
     for i in range(num_interations):
         cost_graph.append(
-            compute_cost(starting_a, starting_b, starting_c, starting_d, points)
+            compute_cost(
+                starting_a, starting_b, starting_c, starting_d, points
+            )
         )
 
         a, b, c, d = step_gradient(
@@ -97,7 +99,13 @@ points = np.array([x, y2]).T
 # print(points.shape)
 
 a, b, c, d, cost_graph = gradient_descent_runner(
-    points, initial_a, initial_b, initial_c, initial_d, learning_rate, num_interations
+    points,
+    initial_a,
+    initial_b,
+    initial_c,
+    initial_d,
+    learning_rate,
+    num_interations,
 )
 
 # print(a, b, c, d)

@@ -1,9 +1,8 @@
 # Imports
-import numpy as np
-import matplotlib.pyplot as plt
 import matplotlib.cm as cm
+import matplotlib.pyplot as plt
+import numpy as np
 from sklearn.cluster import KMeans
-
 
 # Aprendizado de máquina não supervisionada - KMeans (sensível a escala - deixar tudo na mesma escala) e DBSCAN
 
@@ -31,7 +30,9 @@ plt.close()
 dado_mute = dado2[:, 10:-1]
 
 
-plt.imshow(dado_mute.T, aspect="auto", extent=[fv, fv + nv * dv, nt * dt, 11 * dt])
+plt.imshow(
+    dado_mute.T, aspect="auto", extent=[fv, fv + nv * dv, nt * dt, 11 * dt]
+)
 plt.xlabel("Velocidades (m/s)")
 plt.ylabel("Tempo (s)")
 plt.colorbar()
@@ -88,14 +89,21 @@ plt.close()
 
 k = 4
 ctrds = np.zeros([k, 3])
-colors = cm.rainbow(np.linspace(0, 1, k))  # vou plotar cada centroide com uma cor
-kmeans = KMeans(n_clusters=k, init="k-means++", max_iter=300, n_init=10, random_state=0)
+colors = cm.rainbow(
+    np.linspace(0, 1, k)
+)  # vou plotar cada centroide com uma cor
+kmeans = KMeans(
+    n_clusters=k, init="k-means++", max_iter=300, n_init=10, random_state=0
+)
 kmeans.fit(X)
 pred_y = kmeans.fit_predict(X)
 
 plt.scatter(X[:, 1], X[:, 0], c=pred_y)
 plt.scatter(
-    kmeans.cluster_centers_[:, 1], kmeans.cluster_centers_[:, 0], s=300, c=colors
+    kmeans.cluster_centers_[:, 1],
+    kmeans.cluster_centers_[:, 0],
+    s=300,
+    c=colors,
 )
 plt.savefig("imgs/semblance_clusters.png")
 plt.close()
@@ -115,7 +123,10 @@ plt.colorbar()
 
 plt.scatter(X[:, 1], X[:, 0], c=pred_y)
 plt.scatter(
-    kmeans.cluster_centers_[:, 1], kmeans.cluster_centers_[:, 0], s=300, c=colors
+    kmeans.cluster_centers_[:, 1],
+    kmeans.cluster_centers_[:, 0],
+    s=300,
+    c=colors,
 )
 plt.savefig("imgs/semblance_centroides.png")
 plt.close()
